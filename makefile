@@ -14,7 +14,6 @@ image-build:
 	docker build -t $(TARGET_IMAGE) .
 
 push-image:
-	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 	docker push $(TARGET_IMAGE)
 
 clean:

@@ -21,6 +21,6 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: make push-image
+    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-image
     on:
       branch: master
