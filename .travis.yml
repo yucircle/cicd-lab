@@ -8,9 +8,19 @@ os:
 services:
   - docker
 
-install:
-  - make image-build
+# install:
+#   - make image-build
 
-script:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - make push-image
+# script:
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#   - make push-image
+
+deploy:
+  - provider: script
+    script: make image-build
+    on:
+      branch: master
+  - provider: script
+    script: make push-image
+    on:
+      branch: master
