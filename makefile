@@ -16,6 +16,5 @@ image-build:
 push-image:
 	docker push $(TARGET_IMAGE)
 
-.PHONY: 
-	image push $(TARGET)
+.PHONY: image push $(TARGET)
 
