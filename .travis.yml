@@ -1,13 +1,16 @@
-language: ruby
+language: go
+go:
+  - "1.13"
+
+os:
+  - linux
 
 services:
   - docker
 
-before_install:
-  - docker build -t carlad/sinatra .
-  - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
-  - docker ps -a
-  - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
+install:
+  - make image-build
 
 script:
-  - bundle exec rake test
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - make push-image
