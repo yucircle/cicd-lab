@@ -6,7 +6,7 @@ TARGET_IMAGE=$(IMAGE_PREFIX)/$(TARGET):$(TAG)
 all: image
 
 $(TARGET):
-	CGO_ENABLED=0 GOOS=linux go build -o dist/$(TARGET) $(PKG)
+	CGO_ENABLED=0 GOOS=linux go build -o $(TARGET) $(PKG)
 
 gitlog:
 
@@ -16,8 +16,5 @@ image-build:
 push-image:
 	docker push $(TARGET_IMAGE)
 
-clean:
-	rm -rf dist
-
-.PHONY: image clean push $(TARGET)
+.PHONY: image push $(TARGET)
 
