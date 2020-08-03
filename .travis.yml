@@ -1,19 +1,15 @@
+# 語言
 language: go
+# 版本
 go:
   - "1.13"
 
 os:
   - linux
 
+# 會用到的服務
 services:
   - docker
-
-# install:
-#   - make image-build
-
-# script:
-#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#   - make push-image
 
 deploy:
   - provider: script
@@ -21,6 +17,7 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && make push-image
+    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && \
+            make push-image
     on:
       branch: master
